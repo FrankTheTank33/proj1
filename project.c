@@ -1,6 +1,17 @@
-#include <stio.h>
+#include <stdio.h>
 
 int main() {
-gygygy
-  return 0
+int m = 12;
+int e=0;
+int d;
+
+int k = 3;
+
+e=(m+k)%26;
+
+d=(e-k)&26;
+
+printf("%d", d);
+
+  return 0;
 }
