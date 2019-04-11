@@ -35,13 +35,13 @@ int main () {
         switch (o) {  //Selects operation depending option selected.
             case 1: e = encrypt_rotate(c, k); //Inserts byte into encryption function.
             fprintf(output, "%c", e); //Prints encrypted character into Output file.
+            /* printf("%c", e); */
             break;
             case 2: d = decrypt_rotate(c,k); //Inserts byte into decryption fucntion.
-            fprintf(output, "%c", d); //Prints decrypted chracter into Output file.
+            fprintf(output, "%c", d);  //Prints decrypted chracter into Output file.
+            /* printf("%c", d); */
             break;
         }
-         
-
     }
 return 0;
 }
@@ -74,7 +74,6 @@ char decrypt_rotate (char c, int k) {
         if (c-65>=0)
             return (((c-65)-k)%26)+65; 
     }
-    
     //ASCII value reduced by 65 so that A=0...Z=25. This value is changed by the key. The remainder of this value and 26 is found. 65 is added to the value to return to an ASCII value.
     return 0;   
     
