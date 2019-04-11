@@ -8,9 +8,9 @@ int main () {
     char e; // Variable for encrypted letters.
     char d; // Variable for decrypted letters.
     
-    int k=10; // Value of key for encryption.
-    /*scanf("%d", &k); //Enter value of key into Key folder. Run using runProject.
-    printf("The key is %d\n", k); */
+    int k; // Value of key for encryption.
+    scanf("%d", &k); //Enter value of key into Key folder. Run using runProject.
+    printf("The key is %d\n", k); 
     
     int o=0; // Variable for choosing operation.
     printf("(1) For rotational encryption.\n");
@@ -61,11 +61,20 @@ return 0;
 char decrypt_rotate (char c, int k) {
     if ((c<65) || (c>90 && c<97) || (c>122)) //For all non-letter characters, the function does not change them.
     return c;
-    if (c>=97 && c<=122)     //For all lower-case characters.
-    return (((c-97)-k)%26)+97;  
+    if (c>=97 && c<=122) {
+        if (c-97-k<0)
+            return ((((c-97)-k)+26)%26)+97;
+        if (c-97-k >= 0)
+            return (((c-97)-k)%26)+97;  
+    }
     //ASCII value reduced by 97 so that a=0...z=25. This value is changed by the key. The remainder of this value and 26 is found. 97 is added to the value to return to an ASCII value.
-    if (c>=65 && c<=90) //For all upper-case characters.
-    return (((c-65)-k)%26)+65;  
+    if (c>=65 && c<=90) {
+        if (c-65-k<0)
+            return ((((c-65)-k)+26)%26)+65; 
+        if (c-65>=0)
+            return (((c-65)-k)%26)+65; 
+    }
+    
     //ASCII value reduced by 65 so that A=0...Z=25. This value is changed by the key. The remainder of this value and 26 is found. 65 is added to the value to return to an ASCII value.
     return 0;   
     
