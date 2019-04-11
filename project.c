@@ -4,9 +4,11 @@ char encrypt_rotate (char c, int k);
 
 int main () {
     char e; // Variable for encrypted letters.
-    int k=0; // Value of key for encryption.
+    int k; // Value of key for encryption.
+    scanf("%d", &k); //Enter value of key into Key folder. Run using runProject.
+    printf("The key is %d\n", k);
     
-    FILE *input;
+    FILE *input; 
     FILE *output;
     
     input = fopen("Input.txt", "r"); //Reads from Input file. Message to be encrypted contained in this file.
