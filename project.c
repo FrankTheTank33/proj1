@@ -1,21 +1,22 @@
 #include <stdio.h>
 
-int encrypt_rotate (int message_letter, int k);
+int encrypt_rotate (char c, int k);
 
-int main () {    
-    int cipher_letter;
-    int message_letter=0;
+int main () {
+    char c;
+    char e;
     int k=1;
-    printf("Enter allocated value for message letter: \n");
-    scanf("%d", &message_letter);
     
-    cipher_letter = encrypt_rotate (message_letter, k);
-    printf("Cipher letter for %d is %d", message_letter, cipher_letter);
-    
-    
+    FILE *input;
+    input = fopen("Input.txt", "r");
+    output = fopen("Output.txt", "w");
+    while (!feof(input)) {
+        fscanf(input, "%c" &c);
+        e = encrypt_rotate(c, k);
+        fprintf(ouput, "%c" &e);        
 return 0;
 }
 
-int encrypt_rotate (int message_letter, int k) {
-    return (message_letter +k)%26;
+int encrypt_rotate (char c, int k) {
+    return (c+k)%26;
 }
