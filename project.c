@@ -9,10 +9,7 @@ char encrypt_sub (char c);
 int main () {
     char e; // Variable for encrypted letters.
     char d; // Variable for decrypted letters.
-    int k; // Value of key for decryption.
-    printf("Enter key value into Key folder.\n");
-    scanf("%d", &k); //Enter value of key into Key folder. Run using runProject.
-    printf("The key is %d\n", k); 
+    
     
     printf("Select operation via Key folder. \n");
     int o=0; // 
@@ -33,10 +30,15 @@ int main () {
         case 4: printf("Substituion encryption has been chosen. \n");
         break;
     }
-    
-if (o=1) {
-    
-    FILE *input; 
+
+switch (o)  {
+case 1: {
+    int k; // Value of key for decryption.
+    printf("Enter key value into Key folder.\n");
+    scanf("%d", &k); //Enter value of key into Key folder. Run using runProject.
+    printf("The key is %d\n", k); 
+   
+   FILE *input; 
     FILE *output;
     
     input = fopen("Input.txt", "r"); //Reads from Input file. Message to be encrypted contained in this file.
@@ -51,9 +53,14 @@ if (o=1) {
         
             }
         }
+break;
 
-if (o=2) {
-   
+case 2: {
+   int k; // Value of key for decryption.
+    printf("Enter key value into Key folder.\n");
+    scanf("%d", &k); //Enter value of key into Key folder. Run using runProject.
+    printf("The key is %d\n", k); 
+    
     FILE *input; 
     FILE *output;
     
@@ -69,7 +76,9 @@ if (o=2) {
 
     }
 }
-if (o=3) {
+break;
+
+case 3: {
     FILE *input; 
     FILE *output;
     
@@ -84,8 +93,12 @@ if (o=3) {
         fprintf(output, "%c", e);
         
 }
+}
+break;
+}
 return 0;
 }
+
 
  char encrypt_rotate (char c, int k) {
     if ((c<65) || (c>90 && c<97) || (c>122)) //For all non-letter characters, the function does not change them.
