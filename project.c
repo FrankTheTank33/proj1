@@ -6,6 +6,8 @@ char decrypt_rotate (char c, int k);
 
 char encrypt_sub (char c);
 
+char decrypt_sub (char c);
+
 int main () {
     char e; // Variable for encrypted letters.
     char d; // Variable for decrypted letters.
@@ -14,20 +16,20 @@ int main () {
     printf("Select operation via Key folder. \n");
     int o=0; // 
     printf("(1) For rotational encryption.\n");
-    printf("(2) For rotational decryption.\n");
+    printf("(2) For rotational decryption with given key.\n");
     printf("(3) For substitution encryption.\n");
-    printf("(4) For substitution decryption.\n");
+    printf("(4) For substitution decryption with given substitution.\n");
 
     
     scanf("%d", &o);
     switch (o) {
         case 1: printf("Rotational encryption has been chosen.\n");
         break;
-        case 2: printf("Rotational decryption has been chosen.\n");
+        case 2: printf("Rotational decryption with given key has been chosen.\n");
         break;
         case 3: printf("Substitution encryption has been chosen. \n");
         break;
-        case 4: printf("Substituion encryption has been chosen. \n");
+        case 4: printf("Substituion encryption with given substitution has been chosen. \n");
         break;
     }
 
@@ -39,7 +41,7 @@ case 1: {
     printf("The key is %d\n", k); 
    
    FILE *input; 
-    FILE *output;
+   FILE *output;
     
     input = fopen("Input.txt", "r"); //Reads from Input file. Message to be encrypted contained in this file.
     output = fopen("Output.txt", "w"); //Writes encrypted message into the Output file.
@@ -89,16 +91,33 @@ case 3: {
         char c;
         fscanf(input, "%c", &c); //Reads byte from the Input file.
         
-        e = encrypt_sub (c);
-        fprintf(output, "%c", e);
+        e = encrypt_sub (c); //Applies the substitution encryption.
+        fprintf(output, "%c", e); //Prints encrypted message to Output.txt
         
-}
+    }
 }
 break;
+
+case 4: {
+    FILE *input; 
+    FILE *output;
+    
+    input = fopen("Input.txt", "r"); //Reads from Input file. Message to be encrypted contained in this file.
+    output = fopen("Output.txt", "w"); //Writes encrypted message into the Output file.
+    
+    while (feof(input) == 0) {  // Loop which reads each byte from the Input file, puts it through encryption function and prints encrypted letter in Output file. 
+        char c;
+        fscanf(input, "%c", &c); //Reads byte from the Input file.
+        
+        d = decrypt_sub (c); //Applies the substitution decryption.
+        fprintf(output, "%c", d); //Prints decrypted message to Output.txt
+    }
 }
+break;
 return 0;
 }
 
+}
 
  char encrypt_rotate (char c, int k) {
     if ((c<65) || (c>90 && c<97) || (c>122)) //For all non-letter characters, the function does not change them.
@@ -133,61 +152,122 @@ char decrypt_rotate (char c, int k) {
 
 char encrypt_sub (char c) {
     if ((c<65) || (c>90)) 
-    return c;
-    //For all non-letter characters, the function does not change them.
-    if (c>=65 && c<=90) {
-        switch (c) {
-            case 65: return 81; 
+    return c; //For all non-letter characters, the function does not change them.
+    if (c>=65 && c<=90) {   //Defines capital letters by ASCII values. Substitutes each value with an ASCII value of a different capital letter. 
+        switch (c) {    //QWERTY substitution put in as template. Manual input required for different substitutions. Change second column.
+            case 'A': return 'Q'; 
             break;
-            case 66: return 87;
+            case 'B': return 'W';
             break;
-            case 67: return 69;
+            case 'C': return 'E';
             break; 
-            case 68: return 82;
+            case 'D': return 'R';
             break;
-            case 69: return 84;
+            case 'E': return 'T';
             break;
-            case 70: return 89;
+            case 'F': return 'Y';
             break;
-            case 71: return 85;
+            case 'G': return 'U';
             break;
-            case 72: return 73;
+            case 'H': return 'I';
             break;
-            case 73: return 79;
+            case 'I': return 'O';
             break;
-            case 74: return 80;
+            case 'J': return 'P';
             break;
-            case 75: return 65;
+            case 'K': return 'A';
             break;
-            case 76: return 83;
+            case 'L': return 'S';
             break;
-            case 77: return 68;
+            case 'M': return 'D';
             break;
-            case 78: return 70;
+            case 'N': return 'F';
             break;
-            case 79: return 71;
+            case 'O': return 'G';
             break;
-            case 80: return 72;
+            case 'P': return 'H';
             break;
-            case 81: return 74;
+            case 'Q': return 'J';
             break;
-            case 82: return 75;
+            case 'R': return 'K';
             break;
-            case 83: return 76;
+            case 'S': return 'L';
             break;
-            case 84: return 90;
+            case 'T': return 'Z';
             break;
-            case 85: return 88;
+            case 'U': return 'X';
             break;
-            case 86: return 67;
+            case 'V': return 'C';
             break;
-            case 87: return 86;
+            case 'W': return 'V';
             break;
-            case 88: return 66;
+            case 'X': return 'B';
             break;
-            case 89: return 78;
+            case 'Y': return 'N';
             break;
-            case 90: return 77;
+            case 'Z': return 'M';
+            break;
+        }
+    }
+return 0;
+}
+
+char decrypt_sub (char c) {
+   if ((c<65) || (c>90)) 
+    return c; //For all non-letter characters the function does not change them.
+   if (c>=65 && c<=90) {   //Defines capital letters by ASCII values. Substitutes each value with an ASCII value of a different capital letter.
+        switch (c) {    //QWERTY substitution put in as template. Manual input required for different substitutions. Change first column. 
+            case 'Q': return 'A'; 
+            break;
+            case 'W': return 'B';
+            break;
+            case 'E': return 'C';
+            break; 
+            case 'R': return 'D';
+            break;
+            case 'T': return 'E';
+            break;
+            case 'Y': return 'F';
+            break;
+            case 'U': return 'G';
+            break;
+            case 'I': return 'H';
+            break;
+            case 'O': return 'I';
+            break;
+            case 'P': return 'J';
+            break;
+            case 'A': return 'K';
+            break;
+            case 'S': return 'L';
+            break;
+            case 'D': return 'M';
+            break;
+            case 'F': return 'N';
+            break;
+            case 'G': return 'O';
+            break;
+            case 'H': return 'P';
+            break;
+            case 'J': return 'Q';
+            break;
+            case 'K': return 'R';
+            break;
+            case 'L': return 'S';
+            break;
+            case 'Z': return 'T';
+            break;
+            case 'X': return 'U';
+            break;
+            case 'C': return 'V';
+            break;
+            case 'V': return 'W';
+            break;
+            case 'B': return 'X';
+            break;
+            case 'N': return 'Y';
+            break;
+            case 'M': return 'Z';
             break;
         }
     }
