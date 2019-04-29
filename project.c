@@ -84,7 +84,8 @@ case 2: { //Rotational decryption with given key.
 break;
 
 case 3: { //Substitution Encryption
-    FILE *input; 
+   printf("Substitution key must be hard coded below in function 'encrypt_sub' by changing the return values of the switch case.\n");
+   FILE *input; 
     FILE *output;
     
     input = fopen("Input.txt", "r"); //Reads from Input file. Message to be encrypted contained in this file.
@@ -102,6 +103,7 @@ case 3: { //Substitution Encryption
 break;
 
 case 4: { //Substitution Decryption with Given Substitutes
+    printf("Substitution key must be hard coded below in function 'decrypt_sub' by changing the case values of the switch case.\n");
     FILE *input; 
     FILE *output;
     
@@ -262,7 +264,7 @@ case 5: { //Rotational Decryption Without Given Key
     
     FILE *output;
     
-    /* Using the 5 different keys, 5 different "decryptions" and each is printed into a seperate file.
+    /* Using the 5 different keys, 5 different "decryptions" are found and each is printed into a seperate file.
     It is highly likely one of these "decryptions" will provide a readable message and is the actual decryption.
     This is a "shotgun" approach to the issue. */
     
@@ -383,7 +385,7 @@ char decrypt_rotate (char c, int k) {
 char encrypt_sub (char c) {
     if ((c<65) || (c>90)) 
     return c; //For all non-letter characters, the function does not change them.
-    if (c>=65 && c<=90) {   //Defines capital letters by ASCII values. Substitutes each value with an ASCII value of a different capital letter. 
+    if (c>=65 && c<=90) { //Defines capital letters by ASCII values. Substitutes each value with an ASCII value of a different capital letter. 
         switch (c) {    //QWERTY substitution put in as template. Manual input required for different substitutions. Change second column.
             case 'A': return 'Q'; 
             break;
